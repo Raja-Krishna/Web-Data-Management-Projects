@@ -1,28 +1,14 @@
-# Pong Game
+# Top Restaurants
 
-You need to write a JavaScript file pong.js, used in the file pong.html, that implements the following actions:
+You need to edit the HTML file yelp.html and the JavaScript file yelp.js. Your HTML web page must have 3 sections:
 
-* initialize: initialize the game
-* startGame: starts the game (when you click the mouse)
-* setSpeed: sets the speed to 0 (slow), 1 (medium), 2 (fast)
-* resetCounter: resets the score to zero
-* movePaddle: moves the paddle up and down, by following the mouse
+1. A search text area to put search terms with the button "Find"
+2. A Google map of size 600*500 pixels, initially centered at (32.75, -97.13) with zoom level 16
+3. A text display area
 
+When you write some search terms in the search text area, say "Indian buffet", it will find the 10 best restaurants in the map area that match the search terms. They may be less than 10 (including zero) sometimes. The map will display the location of these restaurants as map overlay markers with labels from 1 to 10. The text display area will display various information about these restaurants. It will be an ordered list from 1 to 10 that correspond to the best 10 matches. Each list item in the display area will include the following information about the restaurant: the image "image_url", the "name" as a clickable "url" to the Yelp page of this restaurant, and the rating (a number between 1-5). When you search for new terms, it will clear the display area and all the map overlay markers, and will create new ones based on the new search.
 
-**Description:**
+* How do you find the latitude and longitude of a restaurant to put an overlay marker on the map? Each restaurant returned by Yelp has a "coordinate" which contains a "latitude" and a "longitude".
+* How do you tell Yelp to search only on the displayed map? You set the latitude, longitude, and radius on your Yelp search, which can be derived from the map bounding box from the Google Map. You can get the bounding box of the map using the getBounds method (it returns 4 numbers).
 
-The pong court is 800x500px, the pong ball is 20x20px, and the paddle is 102x14px. When you click on the Start button or left-click on the court, the ball must start from a random place at the left border of the court at a random angle between -π/4 and π/4. The paddle can move up and down on the right border by just moving the mouse (without clicking the mouse). The ball bounces on the left, top, and bottom borders of the court. Everytime you hit the ball with the paddle, you add one strike. If the ball crosses the right border (the dotted line), the game is suspended and the strikes so far becomes your score. You would need to click on the Start button or click on the court to restart with a zero number of strikes. So the goal of this game is to move the paddle to protect the right border by hitting the ball.
-
-**Hints:**
-
-* The position of any element is dictated by the three style properties: position, left, and top. If an element is nested inside another and its position is "absolute", the top and left properties are relative to the enclosing element.  
-  &lt;p id="x" style="position: absolute; left: 50px; top: 100px;"> ... </p&gt;  
-  To move this element, just change the left/top attributes using code:  
-  document.getElementById("x").style.top = "10px";
-
-* Note that the values that you set the left/top attributes must have units (e.g., "10px"). It will not work if you set them to numbers.
-* You can get the X and Y coordinates of the mouse using the pageX and pageY attributes of an event (e.g., from the event that is passed on the onmousemove handler).
-* To animate an element, it must be moved by small amounts, many times, in rapid succession. For example, you can use setTimeout("fun()", n) that calls fun() after a delay of n milliseconds (you have to put it in a loop or use recurion).
-* It will be easier to develop your code by first ignoring the paddle and making all the court borders solid, so the ball will bounce on every border. After you make this work, you can change your code so that the ball that tries to cross the right border bounces if it hits the paddle. You need to define a time period (the "tick") dt to calculate the new x/y coordinates from the current. The speed coordinates vx/vy are determined when the ball is kick-started (from the kick angle). The new x is x+vx*dt, but if the new value is beyond the right border, then the ball must be bounced by seting vx = -vx and x = 2*width-x, assuming that the court x-coordinates are from 0 to width. You do something similar for the left, top, and, bottom borders.
-
-**Note:** You should use plain JavaScript. You should not use any JavaScript library, such as JQuery. You should not use the JavaScript canvas object.
+Note that everything should be done asynchronously and your web page should never be redrawn completely. You need only one XMLHttpRequest object for sending a request to Yelp, since Google Maps is already asynchronous. You should not use JQuery.
