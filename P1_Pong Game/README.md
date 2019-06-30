@@ -1,5 +1,8 @@
 # Pong Game
 
+The goal of this project is to learn client-side web programming using JavaScript and AJAX. More specifically, you will create a Web application that displays information about movies.
+
+
 You need to write a JavaScript file pong.js, used in the file pong.html, that implements the following actions:
 
 * initialize: initialize the game
